@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>行空板K10 AR 预览</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    model-viewer {
+      width: 100%;
+      height: 100vh;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <model-viewer 
+    src="https://static.wixstatic.com/3d/830280_dc1d961e2ca24201b39784c59ea71853.glb"
+    ios-src="https://natsuchun.github.io/model-viewer-demo/行空板K10模型.usdz"
+    ar
+    ar-modes="scene-viewer quick-look webxr"
+    camera-controls 
+    tone-mapping="neutral"
+    shadow-intensity="1"
+    camera-orbit="0deg 90deg auto"
+    min-camera-orbit="auto 60deg auto"
+    max-camera-orbit="auto 120deg auto"
+    disable-zoom
+    poster="https://static.wixstatic.com/media/830280_3a6fc82f2f5548dab8d0247ca521373f~mv2.webp">
+  </model-viewer>
+</body>
+</html>
