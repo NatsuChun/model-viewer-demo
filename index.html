@@ -2,31 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>UNIHIKER K10 3D</title>
+  <title>UNIHIKER K10 3D 预览</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    body {
+    html, body {
       margin: 0;
-      background: #f0f0f0;
+      padding: 0;
+      height: 100%;
+      background-color: #f0f0f0;
       font-family: Arial, sans-serif;
     }
     model-viewer {
-      width: 100%;
+      width: 100vw;
       height: 100vh;
+      background-color: #fff;
       display: block;
+      touch-action: pinch-zoom;
+    }
+    @media (max-width: 768px) {
+      model-viewer {
+        height: 100dvh;
+      }
     }
   </style>
 </head>
 <body>
   <model-viewer 
-    src="https://natsuchun.github.io/model-viewer-demo/UNIHIKER K10.glb"
-    camera-controls 
+    src="https://natsuchun.github.io/model-viewer-demo/UNIHIKER_K10.glb"
+    camera-controls
+    zoom-camera
+    touch-action="pinch-zoom"
+    interaction-prompt="none"
     tone-mapping="neutral"
     shadow-intensity="1"
     camera-orbit="0deg 90deg auto"
     min-camera-orbit="auto 60deg auto"
     max-camera-orbit="auto 120deg auto"
-    disable-zoom
     poster="https://static.wixstatic.com/media/830280_3a6fc82f2f5548dab8d0247ca521373f~mv2.webp">
   </model-viewer>
 </body>
