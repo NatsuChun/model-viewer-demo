@@ -32,11 +32,38 @@
       padding: 1em 1.5em;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+      min-width: 250px;
+    }
+    #progress-bar {
+      width: 100%;
+      background-color: #ddd;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+    #progress-bar-inner {
+      height: 12px;
+      width: 0%;
+      background-color: #4CAF50;
+      transition: width 0.2s ease;
+    }
+    #progress-text {
+      margin-top: 4px;
+      font-size: 14px;
+      color: #666;
     }
   </style>
 </head>
 <body>
-  <div id="loading">Loading model... 0%</div>
+  <div id="loading">
+    <div>Loading model...</div>
+    <div id="progress-bar">
+      <div id="progress-bar-inner"></div>
+    </div>
+    <div id="progress-text">0%</div>
+  </div>
+
   <model-viewer 
     src="https://natsuchun.github.io/model-viewer-demo/UNIHIKER_K10.glb"
     camera-controls
@@ -53,17 +80,20 @@
 
   <script>
     const modelViewer = document.getElementById('modelViewer');
-    const loadingText = document.getElementById('loading');
+    const loadingBox = document.getElementById('loading');
+    const progressBar = document.getElementById('progress-bar-inner');
+    const progressText = document.getElementById('progress-text');
 
     modelViewer.addEventListener('progress', (event) => {
       if (event.detail.totalProgress && event.detail.totalProgress < 1) {
         const percent = Math.round(event.detail.totalProgress * 100);
-        loadingText.textContent = `Loading model... ${percent}%`;
+        progressBar.style.width = `${percent}%`;
+        progressText.textContent = `${percent}%`;
       }
     });
 
     modelViewer.addEventListener('load', () => {
-      loadingText.style.display = 'none';
+      loadingBox.style.display = 'none';
     });
   </script>
 </body>
