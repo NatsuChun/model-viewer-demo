@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>UNIHIKER K10 3D 预览</title>
+  <title>UNIHIKER K10 3D Preview</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
@@ -20,14 +20,23 @@
       display: block;
       touch-action: pinch-zoom;
     }
-    @media (max-width: 768px) {
-      model-viewer {
-        height: 100dvh;
-      }
+    #loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px;
+      color: #333;
+      z-index: 10;
+      background: rgba(255,255,255,0.9);
+      padding: 1em 1.5em;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
+  <div id="loading">Loading model... 0%</div>
   <model-viewer 
     src="https://natsuchun.github.io/model-viewer-demo/UNIHIKER_K10.glb"
     camera-controls
@@ -39,7 +48,25 @@
     camera-orbit="0deg 90deg auto"
     min-camera-orbit="auto 60deg auto"
     max-camera-orbit="auto 120deg auto"
-    poster="https://static.wixstatic.com/media/830280_3a6fc82f2f5548dab8d0247ca521373f~mv2.webp">
+    reveal="interaction"
+    loading="eager"
+    id="modelViewer">
   </model-viewer>
+
+  <script>
+    const modelViewer = document.getElementById('modelViewer');
+    const loadingText = document.getElementById('loading');
+
+    modelViewer.addEventListener('progress', (event) => {
+      if (event.detail.totalProgress && event.detail.totalProgress < 1) {
+        const percent = Math.round(event.detail.totalProgress * 100);
+        loadingText.textContent = `Loading model... ${percent}%`;
+      }
+    });
+
+    modelViewer.addEventListener('load', () => {
+      loadingText.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
