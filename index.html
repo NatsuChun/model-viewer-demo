@@ -1,101 +1,37 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>UNIHIKER K10 3D Preview</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>UNIHIKER K10 AR</title>
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      height: 100%;
-      background-color: #f0f0f0;
+      background: #f0f0f0;
       font-family: Arial, sans-serif;
     }
     model-viewer {
-      width: 100vw;
-      height: 100vh;
-      background-color: #fff;
-      display: block;
-      touch-action: pinch-zoom;
-    }
-    #loading {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 18px;
-      color: #333;
-      z-index: 10;
-      background: rgba(255,255,255,0.9);
-      padding: 1em 1.5em;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-      min-width: 250px;
-    }
-    #progress-bar {
       width: 100%;
-      background-color: #ddd;
-      border-radius: 0;
-      overflow: hidden;
-      margin-top: 10px;
-    }
-    #progress-bar-inner {
-      height: 6px;
-      width: 0%;
-      background-color: #FF5A00;
-      transition: width 0.2s ease;
-      border-radius: 0;
-    }
-    #progress-text {
-      margin-top: 4px;
-      font-size: 14px;
-      color: #666;
+      height: 100vh;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div id="loading">
-    <div>Loading model...</div>
-    <div id="progress-bar">
-      <div id="progress-bar-inner"></div>
-    </div>
-    <div id="progress-text">0%</div>
-  </div>
-
   <model-viewer 
     src="https://natsuchun.github.io/model-viewer-demo/UNIHIKER_K10.glb"
-    camera-controls
-    zoom-camera
-    touch-action="pinch-zoom"
-    interaction-prompt="none"
+    ios-src="https://natsuchun.github.io/model-viewer-demo/UNIHIKER_K10.usdz"
+    ar
+    ar-modes="scene-viewer quick-look webxr"
+    camera-controls 
     tone-mapping="neutral"
     shadow-intensity="1"
-    auto-rotate
-    exposure="1"
-    environment-image="neutral"
-    id="modelViewer">
+    camera-orbit="0deg 90deg auto"
+    min-camera-orbit="auto 60deg auto"
+    max-camera-orbit="auto 120deg auto"
+    disable-zoom
+    poster="https://static.wixstatic.com/media/830280_3a6fc82f2f5548dab8d0247ca521373f~mv2.webp">
   </model-viewer>
-
-  <script>
-    const modelViewer = document.getElementById('modelViewer');
-    const loadingBox = document.getElementById('loading');
-    const progressBar = document.getElementById('progress-bar-inner');
-    const progressText = document.getElementById('progress-text');
-
-    modelViewer.addEventListener('progress', (event) => {
-      if (event.detail.totalProgress && event.detail.totalProgress < 1) {
-        const percent = Math.round(event.detail.totalProgress * 100);
-        progressBar.style.width = `${percent}%`;
-        progressText.textContent = `${percent}%`;
-      }
-    });
-
-    modelViewer.addEventListener('load', () => {
-      loadingBox.style.display = 'none';
-    });
-  </script>
 </body>
 </html>
